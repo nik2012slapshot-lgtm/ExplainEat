@@ -1,0 +1,29 @@
+# API Keys - NIEMALS einreichen!
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# Claude Code intern
+.claude/
+
+# Temporaere Dateien
+*.tmp
+*.log
+
+# Wettbewerbs-interne Dateien (optional)
+video_skript.md
+projektbeschreibung.md
+memory/
