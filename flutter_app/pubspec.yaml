@@ -1,0 +1,19 @@
+name: explain_eat_flutter
+description: Eine Flutter-App für ExplainEat mit Backend-Anbindung.
+publish_to: 'none'
+version: 0.1.0+1
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^0.13.6
+  image_picker: ^0.8.7+6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true

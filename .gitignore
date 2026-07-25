@@ -1,29 +1,29 @@
-# API Keys - NIEMALS einreichen!
-.env
-
-# Python
 __pycache__/
+.venv/
 *.pyc
 *.pyo
-*.egg-info/
-dist/
-build/
-.venv/
-venv/
+*.pyd
 env/
+venv/
+.DS_Store
 
-# IDE
-.vscode/settings.json
+# Secrets — niemals committen
+.env
+
+# IDE / Tooling
+.vscode/
 .idea/
-
-# Claude Code intern
 .claude/
 
-# Temporaere Dateien
-*.tmp
-*.log
+# Flutter-Zwischenbuilds (build/web bleibt drin, damit die App ohne
+# Flutter-SDK startbar ist)
+flutter_app/build/windows/
+flutter_app/build/linux/
+flutter_app/build/macos/
+flutter_app/build/android/
+flutter_app/build/ios/
+flutter_app/.dart_tool/
 
-# Wettbewerbs-interne Dateien (optional)
+# Interne Arbeitsdateien (nicht Teil der Abgabe)
 video_skript.md
 projektbeschreibung.md
-memory/

@@ -1,0 +1,22 @@
+# Flutter/Dart/Pub related
+.dart_tool/
+build/
+.packages
+.pub-cache/
+pubspec.lock
+
+# Android related
+.android/
+
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Pods/
+ios/Runner.xcworkspace/
+
+# VS Code
+.vscode/
+
+# Generated application files
+*.log
+*.lock
+**/Generated.xcconfig

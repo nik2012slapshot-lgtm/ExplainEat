@@ -1,0 +1,18 @@
+[project]
+name = "explain_eat"
+version = "0.1.0"
+description = "ExplainEat: Explainable Nutrition AI prototype for understandable and balanced eating."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [ { name = "ExplainEat Team", email = "team@example.com" } ]
+license = { text = "MIT" }
+classifiers = [
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent"
+]
+dependencies = [
+    "numpy>=1.25,<2.0"
+]
+
+[project.scripts]
+explain-eat = "app:main"

@@ -1,3 +1,12 @@
-flask==3.1.1
-anthropic==0.57.1
-python-dotenv==1.1.1
+numpy>=2.0
+pillow>=10.0
+requests>=2.28
+opencv-python-headless>=4.8.0
+transformers>=4.35.0
+torch>=2.0.0
+torchvision>=0.15.0
+ultralytics>=8.3.0
+pyyaml>=6.0
+Flask>=2.0.0
+flask-cors>=3.0.0
+
