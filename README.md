@@ -4,9 +4,10 @@
 
 ExplainEat analysiert Mahlzeiten mit KI und erklaert verstaendlich, wie sie den Koerper beeinflussen – wie ein persoenlicher Ernaehrungscoach, nicht wie eine Kalorien-Zaehler-App.
 
-## Demo-Video / Screen Recording
+## Videos
 
-Das Video zeigt die App in Aktion: [ExplainEat_Pitch_v3.mp4](ExplainEat_Pitch_v3.mp4)
+- **[ExplainEat_Pitch_v3.mp4](ExplainEat_Pitch_v3.mp4)** – Pitch-Video (2 Min): Idee, KI-Methode, Ergebnis
+- **[ExplainEat_App_Demo.mp4](ExplainEat_App_Demo.mp4)** – Screen Recording: die laufende App in Aktion
 
 ---
 
@@ -55,7 +56,8 @@ ExplainEat/
 ├── templates/
 │   └── index.html           # Frontend (HTML/CSS/JS)
 ├── kritische_reflexion.md   # Kritische Reflexion (Wettbewerb)
-├── ExplainEat_Pitch_v3.mp4  # Demo-Video / Screen Recording
+├── ExplainEat_Pitch_v3.mp4  # Pitch-Video (2 Min)
+├── ExplainEat_App_Demo.mp4  # Screen Recording der App
 └── README.md
 ```
 
