@@ -11,12 +11,39 @@ vor** und **generiert eigene Rezepte** – alles auf den Nutzer zugeschnitten.
 
 ## Wettbewerbs-Abgabe
 
+> **Ein Dokument für alles:** [`ExplainEat_Abgabe.pdf`](ExplainEat_Abgabe.pdf) —
+> enthält Abgabe-Übersicht, Kennzahlen, kritische Reflexion und die vollständige
+> System- und KI-Dokumentation (23 Seiten).
+
 | | Datei |
 |---|---|
+| **Abgabe-Dokument (PDF)** | [`ExplainEat_Abgabe.pdf`](ExplainEat_Abgabe.pdf) |
 | **Video-Pitch** (2 Min) | [`ExplainEat_Pitch_v4.mp4`](ExplainEat_Pitch_v4.mp4) |
 | **Screen Recording der App** | [`ExplainEat_App_Demo.mp4`](ExplainEat_App_Demo.mp4) |
 | **Kritische Reflexion** | [`kritische_reflexion.md`](kritische_reflexion.md) |
+| **System- und KI-Dokumentation** | [`DOKUMENTATION.md`](DOKUMENTATION.md) |
 | **Code** | dieses Repository (siehe Schnellstart unten) |
+
+### Kennzahlen des eigenen KI-Modells
+
+Gemessen auf einem unabhängigen Testanteil (4 500 Beispiele):
+
+| Messgrösse | Modell | Lineare Baseline | Konstante Baseline |
+|---|---|---|---|
+| Score MAE (0–100) | **7,96** | 10,26 | 16,49 |
+| Score R² | **0,758** | 0,599 | −0,000 |
+| Empfehlungsklasse | **98,4 %** | — | — |
+| Flag-Genauigkeit | **97,5 %** | — | — |
+
+Reproduzierbar mit:
+
+```bash
+python scripts/train_ai_model.py --samples 30000 --epochs 40 --seed 42
+python scripts/evaluate_model.py --samples 30000 --seed 42
+```
+
+Einordnung der Zahlen: siehe [`ABGABE_UEBERSICHT.md`](ABGABE_UEBERSICHT.md)
+und Anhang B.1 der Dokumentation.
 
 ---
 

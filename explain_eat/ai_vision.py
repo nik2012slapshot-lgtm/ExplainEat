@@ -1,3 +1,7 @@
+# Annotations are evaluated lazily so this module still imports when the
+# optional torch/torchvision extras are missing (see the try block below).
+from __future__ import annotations
+
 import io
 import json
 from pathlib import Path

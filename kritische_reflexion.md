@@ -1,99 +1,127 @@
-# Kritische Reflexion – ExplainEat
+# Kritische Reflexion — ExplainEat
 
----
+**Projekt:** ExplainEat — erklärbare, personalisierte Ernährungs-KI  
+**Eingereicht von:** Nik · Schweizer KI Challenge 2026
 
-## 1. Was war das Ziel? Habe ich es erreicht? Wie bin ich vorgegangen?
+## 1. Ziel des Projekts, Zielerreichung und Vorgehen
+Ziel. Eine App, die Ernährung nicht nur misst, sondern auch erklärt und personalisiert. Sie soll Lebensmittel auf einem Foto erkennen, eine Mahlzeit anhand eines individuellen Profils bewerten und passende Rezepte vorschlagen oder selbst zusammenstellen. Zum Profil gehören beispielsweise das Körpergewicht, das persönliche Ziel, die körperliche Aktivität und mögliche Allergien.
 
-**Ziel:** Ich wollte eine App bauen, die Mahlzeiten nicht einfach nur mit Zahlen beschreibt (z.B. „500 Kalorien"), sondern erklärt, was das für eine bestimmte Person bedeutet – je nach Ziel, Gewicht und Profil.
+Zielerreichung. Das Ziel wurde weitgehend erreicht. Es gibt eine funktionsfähige Web-App mit Flutter und einem Python-/Flask-Backend. Die App verfügt über eine Fotoerkennung, eine personalisierte Bewertung mit verständlicher Erklärung, rund 1’000 Rezepte, KI-basierte Empfehlungen und eine KI-gestützte Rezeptgenerierung mit einer an das Körpergewicht angepassten Einkaufsliste.
 
-**Erreicht:** Ja, im Kern. Man macht ein Foto, die KI erkennt die Zutaten, berechnet Nährwerte, vergibt einen Score von 0–100 und erklärt auf normaler Sprache, was passt und was fehlt. Rezeptvorschläge und Allergie-Filter funktionieren ebenfalls.
+Noch nicht erreicht ist eine nötige Genauigkeit, sowie eine präzise Schätzung der Mengen auf einem Foto. Diese Einschränkungen werden in den Abschnitten 3 und 4 genauer beschrieben.
 
-**Nicht erreicht:** Die App kann noch nicht zuverlässig schätzen, wie viel von einem Lebensmittel auf dem Teller liegt (z.B. „Reis – aber 80g oder 250g?"). Die Rezeptdatenbank ist außerdem noch klein.
+Vorgehen / KI-Technologien. ExplainEat verwendet zwei KI-Bausteine:
 
-**Vorgehen:**
-1. Zuerst habe ich Regeln festgelegt: Was macht eine Mahlzeit für welches Profil gut oder schlecht?
-2. Aus diesen Regeln habe ich automatisch 30.000 Beispiele erstellt – sogenannte **Trainingsdaten** (= Datensätze, aus denen eine KI lernt).
-3. Ein **neuronales Netz** (= ein KI-Modell, das ähnlich wie ein Gehirn aus Beispielen lernt) habe ich damit trainiert, mithilfe von **PyTorch** (= eine weit verbreitete Software zum Entwickeln von KI-Modellen).
-4. Zuletzt habe ich die Bilderkennung (**SAM2 über Roboflow** = ein fertiges KI-Modell, das Objekte auf Fotos erkennt) und die App-Oberfläche (mit **Flutter** = ein Werkzeug zum Bauen von Smartphone-Apps) angebunden.
+(a) Ein eigenes neuronales Netz, das mit PyTorch (Open-Source-Framework für maschinelles Lernen und Deep Learning) entwickelt wurde. Dabei handelt es sich um ein mehrschichtiges Perzeptron. Als Eingaben verwendet das Modell Informationen aus dem persönlichen Profil und die Makronährwerte einer Mahlzeit. Als Ausgaben erzeugt es einen Score zwischen 0 und 100, vier Hinweise zu Protein, Ballaststoffen, Zucker und Kalorien sowie eine Empfehlungsklasse.
 
----
+(b) Eine Bilderkennung mit einem vortrainierten Open-Vocabulary-Segmentierungsmodell. Dieses ist über einen Roboflow-Workflow eingebunden und kann mehrere Zutaten auf einem Foto erkennen.
 
-## 2. Was ist meine Eigenleistung? Welche Hilfe habe ich genutzt? Wo habe ich KI eingesetzt?
+Das System ExplainEat besteht aus folgenden Bausteinen:
 
-**Selbst gemacht:**
-- Konzept und Idee der App
-- Die Bewertungslogik: Welche Mahlzeit bekommt welchen Score, und warum?
-- Das KI-Modell: Aufbau, Training und alle Entscheidungen dazu
-- Die Nährwertdatenbank mit den Zutaten
-- Die Allergie-Erkennung – auch bei versteckten Allergenen (z.B. Nüsse in Pesto)
-- Die Empfehlungs- und Rezeptlogik
-- Die technische Verbindung aller Teile: **Flask** (= unsichtbares „Gehirn" der App im Hintergrund) und **Flutter** (= die Oberfläche, die man als Nutzer sieht)
+- **Bildanalyse** — Erkennung und Segmentierung der Mahlzeit mit Roboflow und SAM2.
+- **Daten- und Wissensbasis** — Nährwerte, Rezepte, Allergene, Profile und Bewertungsregeln.
+- **PyTorch-KI-Modell** — Bildung des Feature Vectors, Training und Berechnung des personalisierten Scores.
+- **Erklärung und Empfehlungen** — Verständliche Auswertung, Verbesserungen und Rezeptvorschläge.
+- **Orchestrierung und Schnittstellen** — Verbindung aller Komponenten über Flask, REST/JSON und die Flutter-App.
 
-**Fertige Hilfsmittel, die ich genutzt habe:**
-PyTorch, das Roboflow-Modell, Flask, Flutter und öffentliche Nährwerttabellen – das sind frei verfügbare Werkzeuge, die ich eingebunden, aber nicht selbst entwickelt habe.
+ExplainEat ist recht umfangreich geworden. Deshalb habe ich mir erlaubt, zusätzlich eine Projektdokumentation beizulegen, die detaillierte Erläuterungen zu den Bausteinen und zu der Integration und den Schnittstellen liefert.
 
-**KI beim Programmieren:** KI-Tools habe ich beim Schreiben von Code eingesetzt – für **Boilerplate-Code** (= sich wiederholende Standard-Codeblöcke), **Debugging** (= Fehler suchen und beheben) und **Refactoring** (= Code vereinfachen und aufräumen). Alle wichtigen Entscheidungen – was die App können soll und wie – habe ich selbst getroffen. Jeden von der KI generierten Code habe ich gelesen und geprüft.
+## 2. Eigenleistung, Hilfsmittel und KI-Einsatz
+Eigenleistung. Zu meiner Eigenleistung gehören die Entwicklung des Konzepts, die Planung der Nutzerführung und die Gestaltung der Anwendung. Ein besonderer Schwerpunkt lag auf der Auswahl und dem Aufbau des eigenen neuronalen Netzes. Dazu gehörten die Architektur, die Codierung der Merkmale und die Trainingsstrategie.
 
----
+Zusätzlich entwickelte ich die Bewertungslogik und legte die Zielwerte fest. Darauf basiert die Nährwertdatenbank und die Rezeptdaten. Ausserdem integrierte ich den mehrstufigen Workflow für die Bilderkennung, führte Tests durch und die Fehlersuche/Bereinigung.
 
-## 3. Was funktioniert? Was funktioniert (noch) nicht?
+Besonders anspruchsvoll war die Verbindung des PyTorch-Modells mit dem Python-/Flask-Backend und dem Flutter-Frontend. Dadurch mussten verschiedene Technologien und Datenformate miteinander verbunden werden.
 
-**Funktioniert:**
-- Foto → Zutaten erkennen → Nährwerte berechnen → Score und Erklärung in normaler Sprache
-- Das Modell stimmt zu ~98% mit meinen selbst definierten Regeln überein
-- Die App reagiert korrekt, wenn ich Profil oder Ziel ändere
-- Der Allergie-Filter funktioniert zuverlässig
+Genutzte Hilfe. Als Programmierunterstützung verwendete ich das KI-Coding-Tool Claude. Das Tool half dabei, anhand meiner Vorgaben Programmcode zu schreiben, Fehler zu finden und mögliche Lösungen vorzuschlagen.
 
-**Funktioniert noch nicht:**
-- Mengenschätzung: Die KI erkennt „Reis", aber nicht wie viel davon auf dem Teller liegt
-- Gemischte Gerichte wie Suppen oder Aufläufe werden noch schlecht erkannt
-- Es gibt keine Analyse über mehrere Tage hinweg
-- Die Ergebnisse wurden noch nicht von Ernährungsexperten unabhängig überprüft
+Die Entscheidungen über die Architektur, die Funktionen und die Bewertungslogik wurden jedoch von mir getroffen. Auch die Ergebnisse wurde von mir akribisch überprüft und angepasst. Der von Claude erstellte Code habe ich nicht ungeprüft übernommen.
 
----
+Wo KI im Produkt steckt.
 
-## 4. Was kann meine KI? Was kann sie nicht?
+(1) Das selbst trainierte neuronale Netz von ExplainEat bewertet die Mahlzeiten. Es erzeugt den Score, die Hinweise zu einzelnen Nährwerten und eine Empfehlungsklasse. Die Ergebnisse werden ausserdem für die Auswahl und Zusammenstellung passender Rezepte verwendet.
 
-**Was sie kann:**
-- Eine Mahlzeit im Kontext einer Person bewerten – nicht nur Zahlen zeigen
-- Erklären, was fehlt und warum
-- Passende Rezepte vorschlagen und neue erstellen
-- Allergene erkennen, auch bei Lebensmitteln, wo man es nicht vermuten würde
+(2) Das Segmentierungsmodell übernimmt die Bilderkennung und erkennt mehrere Lebensmittel oder Zutaten auf einem Foto.
 
-**Was sie nicht kann:**
-- Den genauen Nährwert einer Mahlzeit bestimmen – sie schätzt nur
-- Erkennen, wie groß eine Portion ist oder wie ein Gericht zubereitet wurde
-- Medizinische Empfehlungen geben
-- Besondere Situationen berücksichtigen, z.B. Schwangerschaft oder chronische Krankheiten
-- Essstörungen erkennen oder darauf reagieren
-- Ernährungswissenschaft wirklich „verstehen" – sie erkennt Muster in Daten, versteht aber keine Zusammenhänge
+Für die zentrale Ernährungsbewertung wurde bewusst keine fertige Sprach-KI verwendet. Stattdessen wurde ein eigenes Modell trainiert, damit dessen Aufbau, Eingaben und Ausgaben besser verstanden und erklärt werden können.
 
----
+## 3. Was funktioniert — und was (noch) nicht
+Funktioniert: Die Anwendung kann auf einem Foto mehrere einzelne Zutaten erkennen. Anschliessend bewertet sie die Mahlzeit anhand des persönlichen Profils und erklärt verständlich, weshalb die Mahlzeit gut oder weniger gut zum gewählten Ziel passt.
 
-## 5. Welche Daten habe ich verwendet? Sind sie zuverlässig und fair?
+Die App enthält rund 1’000 durchsuchbare Rezepte. Die KI-Empfehlungen unterscheiden sich je nach Profil. Bei einem Profil mit dem Ziel Muskelaufbau werden beispielsweise eher proteinreiche Gerichte vorgeschlagen. Bei einem Profil mit dem Ziel Abnehmen werden eher leichtere Gerichte empfohlen.
 
-**Verwendete Daten:**
-- 30.000 künstlich generierte Trainingsbeispiele (automatisch aus meinen eigenen Regeln erstellt)
-- Nährwerte von ~40 Grundlebensmitteln aus öffentlichen Tabellen
-- ~1.000 Rezepte
+Weitere funktionierende Bestandteile sind:
 
-**Zuverlässig?** Die Daten sind in sich stimmig – aber sie sind nicht real. Die 98% Genauigkeit bedeuten: Das Modell folgt meinen Regeln gut. Ob diese Regeln ernährungswissenschaftlich korrekt sind, wurde nicht unabhängig bestätigt.
+- KI-gestützte Rezeptvorschläge
+- eine an das Körpergewicht angepasste Einkaufsliste
+- Hinweise auf mögliche Nährstoffdefizite
+- ein Allergie-Filter, der ungeeignete Rezepte ausblendet
+Funktioniert (noch) nicht gut: Die Mengenschätzung auf einem Foto ist noch ungenau. Sie wird momentan hauptsächlich aus der Grösse des erkannten Bereichs auf dem Bild abgeleitet. Ein grosser Bereich auf einem Foto bedeutet jedoch nicht automatisch, dass das Lebensmittel auch ein hohes Gewicht besitzt.
 
-**Mögliche Biases (= einseitige Verzerrungen in den Daten):**
+Die Nährwertdatenbank umfasst momentan nur ungefähr 40 Lebensmittel. Bei unbekannten Zutaten greift das System deshalb auf Standard- oder Ersatzwerte zurück. Dadurch kann die Bewertung ungenau werden.
 
-- **Kultur-Bias:** Meine Datenbank und Rezepte sind größtenteils westlich geprägt. Asiatische, afrikanische oder orientalische Gerichte werden schlechter erkannt und bewertet – für Nutzer mit anderen Essgewohnheiten ist das unfair.
-- **Regel-Bias:** Meine Definition von „gesund" basiert auf gängigen Ernährungsempfehlungen. Vegane, **ketogene** (= sehr kohlenhydratarme Ernährung) oder religiös bedingte Ernährungsweisen können schlechter bewertet werden, obwohl sie für die jeweilige Person vollkommen passen.
-- **Körper-Bias:** Standardformeln für den Kalorienbedarf passen nicht für alle gleich gut – sehr kleine, ältere, chronisch kranke oder schwangere Personen können falsche Empfehlungen erhalten.
-- **Bild-Bias:** Das Bilderkennungs-Modell (Roboflow) wurde von Dritten entwickelt und trainiert – ich hatte keinen Einfluss darauf, mit welchen Bildern es ursprünglich gelernt hat.
+Die Erklärungstexte werden aus den Ergebnissen des Modells und aus vorbereiteten Textbausteinen zusammengesetzt. Sie werden nicht vollständig frei durch eine Sprach-KI formuliert.
 
----
+Das eigene neuronale Netz lernt aus synthetischen, regelbasierten Trainingsdaten. Es kann die darin enthaltenen Ernährungsregeln gut wiedergeben, wurde bisher aber noch nicht mit genügend echten Daten oder «medizinisch» geprüften Ergebnissen verglichen.
 
-## 6. Zwei Szenarien
+Auch der Login ist bisher nur sehr einfach umgesetzt und deshalb nicht für eine produktive Anwendung mit echten persönlichen Daten geeignet. (Prototyp)
 
-**a) Positive Erfahrung:**
+## 4. Was die KI kann — und was nicht
+Kann: Die KI kann eine Mahlzeit für ein bestimmtes Profil bewerten und dazu einen Score sowie eine Begründung ausgeben. Sie kann mögliche Defizite bei Protein oder Ballaststoffen erkennen und auf hohe Werte bei Zucker oder Kalorien hinweisen.
 
-Lea, 24, möchte Muskeln aufbauen und trainiert dreimal pro Woche – kommt aber nicht voran. Sie fotografiert ihr Mittagessen. Meine App bewertet es mit 62/100 und erklärt: „Genug Kalorien, aber zu wenig Protein für dein Ziel." Zum ersten Mal sieht sie konkret, was fehlt. Die App schlägt eine proteinreichere Alternative vor und berücksichtigt dabei automatisch ihre Nussallergie – auch im Pesto, wo Lea selbst nicht daran gedacht hätte.
+Ausserdem kann sie eine sinnvolle Lebensmittel- oder Rezeptkategorie empfehlen, aus rund 1’000 Rezepten passende Vorschläge auswählen und neue Rezeptvorschläge zusammenstellen. Dabei können das Körpergewicht, das persönliche Ziel und angegebene Allergien berücksichtigt werden.
 
-**b) Negative Erfahrung / möglicher Missbrauch:**
+Die Bilderkennung kann mehrere Zutaten auf einem Foto erkennen.
 
-Jonas, 17, ist unsicher mit seinem Körper und gibt ein viel zu niedriges Zielgewicht in meine App ein. Die App prüft das nicht und berechnet daraufhin einen sehr niedrigen Kalorienbedarf. Normale Mahlzeiten werden mit roten Warnungen bewertet. Aus einem Erklär-Werkzeug wird ein Kontroll-Instrument, das ungesundes Essen scheinbar „bestätigt" – mit der Autorität einer objektiven KI. Außerdem könnten Profildaten und Essensfotos als Druckmittel durch andere missbraucht werden, z.B. durch Trainer. Hinzu kommt: Essensfotos und Profildaten sind persönliche Gesundheitsdaten. Meine App bräuchte Mindestwerte beim Zielgewicht, Warnhinweise bei auffälligen Mustern und einen klaren Hinweis, dass es sich um einen Prototyp handelt – keine medizinische Beratung.
+Kann nicht: Die KI kann keine medizinisch verlässliche oder therapeutische Beratung leisten. Sie kann Erkrankungen wie Diabetes, Stoffwechselstörungen oder Essstörungen nicht sicher berücksichtigen.
+
+Auch versteckte Allergene können nicht vollständig erkannt werden. Besonders bei verarbeiteten oder unbekannten Produkten ist häufig nicht sichtbar, welche Zutaten tatsächlich enthalten sind.
+
+Die KI kann ausserdem keine exakten Grammangaben aus einem Foto bestimmen, keine beliebigen Fragen in natürlicher Sprache verstehen und die Korrektheit ihrer Ergebnisse nicht garantieren.
+
+ExplainEat ist deshalb ein Hilfsmittel zur Orientierung und zum Lernen. Die Anwendung ist kein Ersatz für eine medizinische oder professionelle Ernährungsberatung.
+
+## 5. Daten: Zuverlässigkeit, Fairness, Bias
+Verwendete Daten.
+
+(a) Synthetische Trainingsdaten mit rund 30’000 künstlich erstellten Kombinationen aus persönlichen Profilen und Mahlzeiten. Die dazugehörigen Bewertungen wurden anhand allgemeiner Ernährungsregeln erzeugt. Dazu gehören beispielsweise der ungefähre Proteinbedarf pro Kilogramm Körpergewicht und eine grobe Berechnung des Kalorienbedarfs.
+
+(b) Eine kleine Nährwertdatenbank mit typischen Durchschnittswerten pro 100 Gramm eines Lebensmittels.
+
+(c) Rund 1’000 Rezepte, die überwiegend programmatisch aus echten und üblichen Zutatenkombinationen zusammengestellt wurden.
+
+Zuverlässigkeit. Für einen Prototyp sind die verwendeten Daten brauchbar. Die Bewertungen beruhen jedoch hauptsächlich auf allgemeinen Empfehlungen und Faustregeln. Sie wurden nicht durch eigene klinische Studien bestätigt.
+
+Auch die gespeicherten Nährwerte sind nur Durchschnittswerte. Die tatsächlichen Werte können sich je nach Produkt, Herkunft, Zubereitungsart und Portionsgrösse unterscheiden.
+
+Fairness / Bias (ehrlich):
+
+Demografischer Bias: Die verwendeten Zielwerte orientieren sich an Durchschnittswerten der Bevölkerung. Unterschiede beim Alter, Geschlecht, bei Schwangerschaft, Erkrankungen oder Leistungssport werden nicht ausreichend berücksichtigt. Für diese Personengruppen können die Empfehlungen deshalb unpassend sein.
+
+Körperbau-Bias: Die Skalierung der Portionen verwendet hauptsächlich das Körpergewicht. Sie unterscheidet nicht genau zwischen Muskelmasse, Körperfett, Knochenmasse und Wasseranteil. Dadurch können Portionen über- oder unterschätzt werden.
+
+Kultureller Bias: Die erkennbaren Lebensmittel, die Rezepte und die Nährwertdatenbank sind hauptsächlich westlich und europäisch geprägt. Gerichte aus anderen Kulturen und Regionen werden möglicherweise schlechter erkannt oder nicht passend bewertet.
+
+Sicherheits-Grenze: Der Allergie-Filter erkennt inzwischen auch einige versteckte Allergene über Kategorien. So kann das System beispielsweise erkennen, dass Pesto Nüsse, Tzatziki Milchprodukte und Mayonnaise Ei enthalten kann.
+
+Der Filter arbeitet jedoch weiterhin hauptsächlich mit Schlüsselwörtern und Kategorien. Er kann nicht jedes verarbeitete oder unbekannte Produkt korrekt beurteilen. Deshalb ist er keine medizinische Garantie und darf die eigene Kontrolle der Zutatenliste nicht ersetzen.
+
+## 6. Zwei kurze Szenarien
+a. Positiv. Lena wiegt 68 Kilogramm und hat das Ziel, Muskeln aufzubauen. Sie fotografiert ihr Mittagessen mit ExplainEat.
+
+Die App erkennt Reis und Gemüse und bewertet die Mahlzeit mit 55 von 100 Punkten. ExplainEat erklärt, dass die Mahlzeit zwar Kohlenhydrate und Gemüse enthält, für das Ziel Muskelaufbau jedoch eine ausreichende Proteinquelle fehlt.
+
+Anschliessend empfiehlt die KI ein proteinreicheres Rezept und erstellt eine Einkaufsliste, deren Mengen an Lenas Körpergewicht angepasst sind.
+
+Lena erhält dadurch nicht nur eine Empfehlung, sondern versteht auch, weshalb die ursprüngliche Mahlzeit nicht optimal zu ihrem Ziel passt. Sie kann dieses Wissen später selbst anwenden.
+
+b. Negativ / Missbrauch. Eine Person mit einem problematischen Essverhalten könnte den Kalorien-Score und die Empfehlungen für leichtere Gerichte verwenden, um extreme Einschränkungen zu rechtfertigen. Die Anwendung könnte dadurch unbeabsichtigt ein ungesundes Verhalten verstärken.
+
+Auch beim Allergie-Filter bleibt ein Restrisiko. Häufige versteckte Allergene werden zwar berücksichtigt, ein unbekanntes oder stark verarbeitetes Produkt ausserhalb der gespeicherten Schlüsselwortliste könnte jedoch falsch eingeordnet werden. Dadurch könnte bei der betroffenen Person eine falsche Sicherheit entstehen.
+
+Die Konsequenz daraus ist, dass die App klare Hinweise benötigt:
+
+- ExplainEat bietet keine medizinische Beratung.
+- Allergien müssen immer zusätzlich anhand der Zutatenliste geprüft werden.
+- Bei gesundheitlichen Problemen muss eine Fachperson kontaktiert werden.
+- Für einen praktischen Einsatz wäre eine professionell geprüfte Allergen-Datenbank notwendig.
