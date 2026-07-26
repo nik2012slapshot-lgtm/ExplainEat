@@ -137,6 +137,8 @@ Unterstützung muss konkret benannt werden. Allgemeine Angaben wie „ETH Frau x
 
 ExplainEat besteht aus einem Offline-Teil für Datenaufbau und Training sowie einem Laufzeit-Teil für die Bewertung einer konkreten Mahlzeit. Diese Trennung verhindert, dass Training und produktive Verarbeitung vermischt werden. Sie macht ausserdem sichtbar, an welcher Stelle externe Modelle verwendet werden und wo mein eigenes PyTorch-Modell arbeitet. In der Folge wird ExplainEat Schritt-für-Schritt erklärt.
 
+![Funktions- und Schnittstellenübersicht von ExplainEat](docs/abbildung1_architektur.png)
+
 Abbildung 1: Funktions- und Schnittstellenübersicht von ExplainEat. Das Frontend ist funktional; der technische Schwerpunkt liegt auf Datenaufbau, Modelltraining, Inferenz und Integration.
 
 > Wichtig für die Ergebnisqualität: Ein Fehler in einem frühen Schritt – zum Beispiel eine falsche Zutat oder Portion – kann alle folgenden Berechnungen beeinflussen. Deshalb enthält der Ablauf einen verpflichtenden Korrekturschritt durch den Nutzer und eine separate Plausibilitätsprüfung vor der Erklärung.
