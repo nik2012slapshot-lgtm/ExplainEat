@@ -11,17 +11,12 @@ vor** und **generiert eigene Rezepte** – alles auf den Nutzer zugeschnitten.
 
 ## Wettbewerbs-Abgabe
 
-> **Ein Dokument für alles:** [`ExplainEat_Abgabe.pdf`](ExplainEat_Abgabe.pdf) —
-> enthält Abgabe-Übersicht, Kennzahlen, kritische Reflexion und die vollständige
-> System- und KI-Dokumentation (23 Seiten).
-
 | | Datei |
 |---|---|
-| **Abgabe-Dokument (PDF)** | [`ExplainEat_Abgabe.pdf`](ExplainEat_Abgabe.pdf) |
+| **System- und KI-Dokumentation** | [`ExplainEat_ki.pdf`](ExplainEat_ki.pdf) |
 | **Video-Pitch** (2 Min) | [`ExplainEat_Pitch_v4.mp4`](ExplainEat_Pitch_v4.mp4) |
 | **Screen Recording der App** | [`ExplainEat_App_Demo.mp4`](ExplainEat_App_Demo.mp4) |
 | **Kritische Reflexion** | [`kritische_reflexion.md`](kritische_reflexion.md) |
-| **System- und KI-Dokumentation** | [`DOKUMENTATION.md`](DOKUMENTATION.md) |
 | **Code** | dieses Repository (siehe Schnellstart unten) |
 
 ### Kennzahlen des eigenen KI-Modells
@@ -42,8 +37,10 @@ python scripts/train_ai_model.py --samples 30000 --epochs 40 --seed 42
 python scripts/evaluate_model.py --samples 30000 --seed 42
 ```
 
-Einordnung der Zahlen: siehe [`ABGABE_UEBERSICHT.md`](ABGABE_UEBERSICHT.md)
-und Anhang B.1 der Dokumentation.
+Einordnung: Die 98,4 % betreffen die **Empfehlungsklasse** (4 Klassen), nicht den
+Score. Der Score selbst liegt im Mittel rund 8 Punkte daneben. Die Regel-Engine
+erreicht per Konstruktion einen Fehler von null, weil sie die Zielwerte selbst
+erzeugt — das neuronale Netz lernt also, diese Regeln nachzubilden.
 
 ---
 
